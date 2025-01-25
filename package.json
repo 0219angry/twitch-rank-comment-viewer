@@ -1,0 +1,20 @@
+{
+  "name": "twitch-rank-comment-viewer",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/electron": "^1.4.38",
+    "@types/node": "^22.10.10",
+    "electron": "^34.0.1",
+    "electron-builder": "^25.1.8",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  }
+}

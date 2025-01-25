@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES2021",                     // ターゲットのJSバージョン
+    "module": "commonjs",                   // Node.jsで使うモジュール方式
+    "strict": true,                         // 厳格モード
+    "esModuleInterop": true,                // ESモジュールとの互換性
+    "outDir": "dist",                       // ビルド後の出力フォルダ
+    "rootDir": "src",                       // ソースコードのフォルダ
+    "resolveJsonModule": true,              // JSONインポートのサポート
+    "skipLibCheck": true                    // 型チェックの一部をスキップ
+  },
+  "include": ["src/**/*"],                  // コンパイル対象のフォルダ
+  "exclude": ["node_modules", "dist"]       // 除外するフォルダ
+}
