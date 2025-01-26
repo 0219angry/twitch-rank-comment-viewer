@@ -1,9 +1,12 @@
 {
   "name": "twitch-rank-comment-viewer",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsc && npm run copy-html && electron .",
+    "build": "tsc && npm run copy-html && electron-builder",
+    "copy-html": "copyfiles -u 1 \"src/**/*.html\" dist"
   },
   "keywords": [],
   "author": "",
@@ -12,6 +15,7 @@
   "devDependencies": {
     "@types/electron": "^1.4.38",
     "@types/node": "^22.10.10",
+    "copyfiles": "^2.4.1",
     "electron": "^34.0.1",
     "electron-builder": "^25.1.8",
     "ts-node": "^10.9.2",
