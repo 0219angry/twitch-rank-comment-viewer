@@ -4,17 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Twitch Comment Viewer</title>
-  <style>
-    #chat-container {
-      height: 500px;
-      overflow-y: auto;
-      border: 1px solid #ccc;
-      padding: 10px;
-    }
-  </style>
+  <link rel="stylesheet" href="./comment.css" type="text/css">
 </head>
 <body>
-  <div id="chat-container"></div>
+  <div class="scroll-container" id="chat-container">
+    <div class="commentblock" id="initialize-comment-block"></div>
+  </div>
   <script src="renderer.js"></script>
 </body>
 </html>

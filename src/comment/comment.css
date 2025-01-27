@@ -1,0 +1,27 @@
+.scroll-container {
+  overflow-y: scroll;
+  max-height: 100vh;
+  box-sizing: border-box; /* パディングを含むように設定 */
+  padding: 0;
+  margin: 0;
+}
+
+/* スクロールバーを非表示にする */
+.scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+body::-webkit-scrollbar{
+  display: none;
+}
+
+.commentblock {
+  border: 1px solid black;
+  margin: 3px; /* 余計な外側マージンを削除 */
+  padding: 3px; /* 内側の適度な余白 */
+}
+
+#initialize-comment-block {
+  border: none;
+  height: 100vh;
+}

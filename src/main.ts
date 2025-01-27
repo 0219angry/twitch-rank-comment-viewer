@@ -1,28 +1,72 @@
 import { BrowserWindow, app, ipcMain, IpcMainInvokeEvent } from 'electron';
 import path from 'path';
+import tmi from 'tmi.js';
 
-let mainWindow: BrowserWindow | null;
+// window instance
+let commentWindow: BrowserWindow | null;
+let settingWindow: BrowserWindow | null;
+
+// settings
+let channelName: string = 'Lazvell'; // 対象のチャンネル名
 
 // BrowserWindowのインスタンス生成
-const createWindow = () => {
-  mainWindow = new BrowserWindow({
+const createCommentWindow = () => {
+  commentWindow = new BrowserWindow({
+    width: 320,
+    height: 240,
+    resizable: false,
+    webPreferences: {
+      preload: path.join(__dirname, 'preload/preload.js'),
+    }
+  });
+  
+  commentWindow.loadFile(path.join(__dirname, 'comment/comment.html'));
+  commentWindow.menuBarVisible = false;
+
+  // devtools
+  commentWindow.webContents.openDevTools({mode: 'detach'});
+  commentWindow.webContents.send('initialize');
+};
+
+const createSettingWindow = () => {
+  settingWindow = new BrowserWindow({
     width: 320,
     height: 640,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
+      preload: path.join(__dirname, 'preload/preload.js'),
       contextIsolation: true,
     }
   });
-  console.log(__dirname)
+  settingWindow.loadFile(path.join(__dirname, 'setting/setting.html'));
+}
 
-  mainWindow.loadFile(path.join(__dirname, 'index.html'));
-};
-
-
+// 起動時にコメントビュワーを表示する
 app.once('ready', () => {
-  createWindow();
+  createCommentWindow();
+  // createSettingWindow();
+  // tmiの設定
+  const client = new tmi.Client({
+    options: { debug: true },
+    connection: { reconnect: true, secure: true },
+    channels: [channelName],
+  });
+
+  client.on('message', (channel, tags, message) => {
+    if(commentWindow) {
+      commentWindow.webContents.send('new-comment', {
+        user: tags['display-name'],
+        message,
+      });
+    }
+  });
+
+  client.connect()
 });
 
+// 全てのwindowが閉じられたときアプリケーションを修了
 app.once('window-all-closed', () => {
   app.quit();
 });
+
+
+
