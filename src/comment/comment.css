@@ -6,6 +6,10 @@
   margin: 0;
 }
 
+.scroll-container:focus {
+  outline: none;
+}
+
 /* スクロールバーを非表示にする */
 .scroll-container::-webkit-scrollbar {
   display: none;

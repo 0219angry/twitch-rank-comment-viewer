@@ -7,13 +7,15 @@ let commentWindow: BrowserWindow | null;
 let settingWindow: BrowserWindow | null;
 
 // settings
-let channelName: string = 'Lazvell'; // 対象のチャンネル名
+let channelName: string = 'twitch'; // 対象のチャンネル名
 
 // BrowserWindowのインスタンス生成
 const createCommentWindow = () => {
   commentWindow = new BrowserWindow({
     width: 320,
-    height: 240,
+    height: 480,
+    x: 20,
+    y: 20,
     resizable: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload/preload.js'),
@@ -31,7 +33,9 @@ const createCommentWindow = () => {
 const createSettingWindow = () => {
   settingWindow = new BrowserWindow({
     width: 320,
-    height: 640,
+    height: 480,
+    x: 20,
+    y: 520,
     webPreferences: {
       preload: path.join(__dirname, 'preload/preload.js'),
       contextIsolation: true,
@@ -43,7 +47,7 @@ const createSettingWindow = () => {
 // 起動時にコメントビュワーを表示する
 app.once('ready', () => {
   createCommentWindow();
-  // createSettingWindow();
+  createSettingWindow();
   // tmiの設定
   const client = new tmi.Client({
     options: { debug: true },
