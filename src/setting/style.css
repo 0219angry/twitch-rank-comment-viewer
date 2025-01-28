@@ -1,0 +1,7 @@
+#twitch-channel-name {
+  width:40%;
+}
+
+.input-field:focus {
+  outline: none;
+}

@@ -1,4 +1,4 @@
-import { contextBridge, ipcRenderer } from 'electron';
+import { contextBridge, ipcRenderer, ipcMain } from 'electron';
 
 contextBridge.exposeInMainWorld('electron', {
   initialize: (callback: () => void) => {
@@ -11,5 +11,9 @@ contextBridge.exposeInMainWorld('electron', {
     ipcRenderer.on('new-comment', (_event, data) => {
       callback(data);
     });
+  },
+
+  onSetChannel: (channelName: string) => {
+    ipcRenderer.invoke('set-channel', channelName)
   }
 });
